@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <contextName>concurrent-programming</contextName>
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
+    <property name="loggingRoot"
+              value="./logs" />
+    <property name="logLevel" value="info" />
+
+
+    <appender name="CONSOLE"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date [%thread]%X{mdcData} %-5level %logger{10} [%file:%line] - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+    <root>
+        <level value="info" />
+        <appender-ref ref="CONSOLE"></appender-ref>
+    </root>
+
+
+</configuration>
