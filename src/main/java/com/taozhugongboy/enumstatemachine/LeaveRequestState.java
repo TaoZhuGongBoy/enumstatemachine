@@ -6,10 +6,14 @@ package com.taozhugongboy.enumstatemachine;
  */
 public enum LeaveRequestState {
 
+    /**
+     * 初始化申请单<br/>
+     * 员工个人
+     */
     Submitted {
         @Override
         public LeaveRequestState nextState() {
-            System.out.println("Starting the Leave Request and sending to Team Leader for approval.");
+            System.out.println("开始提交申请单，交由主管进行审批.");
             return Escalated;
         }
 
@@ -18,10 +22,14 @@ public enum LeaveRequestState {
             return "Employee";
         }
     },
+    /**
+     * 进行时<br>
+     * 直接主管
+     */
     Escalated {
         @Override
         public LeaveRequestState nextState() {
-            System.out.println("Reviewing the Leave Request and escalating to Department Manager.");
+            System.out.println("主管审批完成，下一环由部门经理审批...");
             return Approved;
         }
 
@@ -30,10 +38,14 @@ public enum LeaveRequestState {
             return "Team Leader";
         }
     },
+    /**
+     * 最后审批<br>
+     * 角色：部门经理
+     */
     Approved {
         @Override
         public LeaveRequestState nextState() {
-            System.out.println("Approving the Leave Request.");
+            System.out.println("部门经理审批通过！");
             return this;
         }
 
@@ -43,8 +55,16 @@ public enum LeaveRequestState {
         }
     };
 
+    /**
+     * 操作人
+     * @return
+     */
     public abstract String responsiblePerson();
 
+    /**
+     * 下一个流转状态
+     * @return
+     */
     public abstract LeaveRequestState nextState();
 
 }
