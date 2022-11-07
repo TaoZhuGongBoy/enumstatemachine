@@ -2,69 +2,76 @@ package com.taozhugongboy.enumstatemachine;
 
 /**
  * 枚举状态机
+ *
  * @author taozhugongBoy
  */
 public enum LeaveRequestState {
 
     /**
-     * 初始化申请单<br/>
-     * 员工个人
+     * 员工提交申请<br>
+     *
+     * @param opinions 操作意见枚举
+     * @return 1-已申请 2-审核中 3-审核成功 4-审核失败
      */
     Submitted {
         @Override
-        public LeaveRequestState nextState() {
-            System.out.println("开始提交申请单，交由主管进行审批.");
-            return Escalated;
-        }
-
-        @Override
-        public String responsiblePerson() {
-            return "Employee";
+        public Integer setApplyStatus(OpinionsEnum opinionsEnum) {
+            System.out.println("员工提交请假申请单，申请状态已申请...");
+            return 1;
         }
     },
+
     /**
-     * 进行时<br>
-     * 直接主管
+     * 直属主管审批<br>
+     *
+     * @param opinions 操作意见枚举
+     * @return 1-已申请 2-审核中 3-审核成功 4-审核失败
      */
     Escalated {
         @Override
-        public LeaveRequestState nextState() {
-            System.out.println("主管审批完成，下一环由部门经理审批...");
-            return Approved;
+        public Integer setApplyStatus(OpinionsEnum opinionsEnum) {
+            switch (opinionsEnum) {
+                case PASS:
+                    System.out.println("直属主管审批通过,申请状态审核中...");
+                    return 2;
+                case NOT_PASS:
+                    System.out.println("直属主管审批失败,申请状态审核失败...");
+                    return 4;
+            }
+            return null;
         }
 
-        @Override
-        public String responsiblePerson() {
-            return "Team Leader";
-        }
     },
     /**
-     * 最后审批<br>
-     * 角色：部门经理
+     * HR审批<br>
+     *
+     * @param opinions 操作意见枚举
+     * @return 1-已申请 2-审核中 3-审核成功 4-审核失败
      */
     Approved {
         @Override
-        public LeaveRequestState nextState() {
-            System.out.println("部门经理审批通过！");
-            return this;
-        }
-
-        @Override
-        public String responsiblePerson() {
-            return "Department Manager";
+        public Integer setApplyStatus(OpinionsEnum opinionsEnum) {
+            switch (opinionsEnum) {
+                case PASS:
+                    System.out.println("HR审批通过,申请状态审核成功...");
+                    return 3;
+                case NOT_PASS:
+                    System.out.println("HR审批退回,申请状态审核失败...");
+                    return 4;
+            }
+            return null;
         }
     };
 
     /**
-     * 操作人
-     * @return
+     * 申请状态设置
+     *
+     * @param opinionsEnum 操作意见枚举
+     * @return 1-已申请 2-审核中 3-审核成功 4-审核失败
      */
-    public abstract String responsiblePerson();
+    public abstract Integer setApplyStatus(OpinionsEnum opinionsEnum);
 
-    /**
-     * 下一个流转状态
-     * @return
-     */
-    public abstract LeaveRequestState nextState();
+
+
 
 }
