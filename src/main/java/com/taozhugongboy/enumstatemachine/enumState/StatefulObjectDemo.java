@@ -1,4 +1,4 @@
-package com.taozhugongboy.enumstatemachine.simpleState;
+package com.taozhugongboy.enumstatemachine.enumState;
 
 /**
  * 枚举状态机DEMO
