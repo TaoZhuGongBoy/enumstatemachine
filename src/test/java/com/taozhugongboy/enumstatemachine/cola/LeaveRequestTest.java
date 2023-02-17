@@ -1,13 +1,11 @@
 package com.taozhugongboy.enumstatemachine.cola;
 
-import com.alibaba.cola.statemachine.State;
 import com.alibaba.cola.statemachine.StateMachine;
 import com.alibaba.cola.statemachine.StateMachineFactory;
 import com.taozhugongboy.enumstatemachine.SpringApplication;
 import com.taozhugongboy.enumstatemachine.colaStateMachine.ApplyStatusEnum;
 import com.taozhugongboy.enumstatemachine.colaStateMachine.Event;
 import com.taozhugongboy.enumstatemachine.colaStateMachine.LeaveContext;
-import oracle.jvm.hotspot.jfr.ThreadStates;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.DisplayName;
@@ -36,7 +34,7 @@ public class LeaveRequestTest {
         LeaveContext context = new LeaveContext();
 
         ApplyStatusEnum state=stateMachine.fireEvent(ApplyStatusEnum.LEAVE_SUBMIT, Event.EMPLOYEE_SUBMIT,context);
-
+        stateMachine.showStateMachine();
         Assert.assertEquals(ApplyStatusEnum.LEAVE_SUBMIT.getCode(),state.getCode());
 
     }
