@@ -1,13 +1,14 @@
 package com.taozhugongboy.enumstatemachine.enumState;
 
 /**
- * 枚举状态机
+ * 枚举状态机<br>
+ * 请假案例
  * @author taozhugongBoy
  */
-public enum LeaveRequestState {
+public enum LeaveRequestStateEnum {
     Submitted {
         @Override
-        public LeaveRequestState nextState() {
+        public LeaveRequestStateEnum nextState() {
             return Escalated;
         }
 
@@ -18,7 +19,7 @@ public enum LeaveRequestState {
     },
     Escalated {
         @Override
-        public LeaveRequestState nextState() {
+        public LeaveRequestStateEnum nextState() {
             return Approved;
         }
 
@@ -29,7 +30,7 @@ public enum LeaveRequestState {
     },
     Approved {
         @Override
-        public LeaveRequestState nextState() {
+        public LeaveRequestStateEnum nextState() {
             return this;
         }
 
@@ -38,7 +39,8 @@ public enum LeaveRequestState {
             return "Department Manager";
         }
     };
-
-    public abstract LeaveRequestState nextState();
+    //下一个状态
+    public abstract LeaveRequestStateEnum nextState();
+    //责任人
     public abstract String responsiblePerson();
 }
