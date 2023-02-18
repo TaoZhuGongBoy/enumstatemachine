@@ -1,7 +1,7 @@
 package com.taozhugongboy.enumstatemachine.colaStateMachine;
 
 /**
- * @author zhangfengshi
+ * @author taozhugongBoy
  */
 
 public class LeaveContext {

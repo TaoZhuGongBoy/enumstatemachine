@@ -3,9 +3,7 @@ package com.taozhugongboy.enumstatemachine.stateDesignPattern;
 /**
  * @ClassName Context
  * @Description TODO
- * @Author zhangfengshi
- * @Date 2022/11/13
- * @Version 1.0.0
+ * @Author taozhugongBoy
  */
 public class Context {
 
